@@ -14,9 +14,9 @@ public class B1756 {
 		}
 		return result;
 	}
-	public static void printPassword(String arr[], String output[], boolean visited[], int c, int depth, int tmp) {
+	public static void printPassword(String arr[], String output[], int c, int depth, int tmp) {
 		if(depth == c) {
-			// ¸ğÀ½ 1°³ÀÌ»ó , ÀÚÀ½ 2°³ÀÌ»ó ÀÎÁö Ã¼Å©ÇÏ±â
+			// ëª¨ìŒ 1ê°œì´ìƒ , ììŒ 2ê°œì´ìƒ ì¸ì§€ ì²´í¬í•˜ê¸°
 			for(int i=0; i<c; i++) {
 				if(checking(output[i])) {
 					cntmo++;
@@ -35,16 +35,13 @@ public class B1756 {
 			cntmo = 0;
 			cntja = 0;
 			return;
-			// Å»Ãâ Á¶°Ç
+			// íƒˆì¶œ ì¡°ê±´
 		}
 		
 		for(int i=tmp; i<visited.length; i++) {
-			
-				output[depth] = arr[i];
-				tmp++;
-				printPassword(arr, output, visited, c, depth+1, tmp);
-				
-			
+			output[depth] = arr[i];
+			tmp++;
+			printPassword(arr, output,c, depth+1, tmp);
 		}
 	}
 	public static void main(String[] args) {
@@ -54,15 +51,13 @@ public class B1756 {
 		int l = scn.nextInt();
 		String arr [] = new String[l];
 		String output[] = new String[c];
-		boolean visited[] = new boolean[l];
-		//boolean check[] = new boolean[l];
 		scn.nextLine();
 		for(int i=0; i<l; i++) {
 			arr[i] = scn.next();
 		}
 		
 		Arrays.sort(arr);
-		printPassword(arr, output, visited, c, 0, 0);
+		printPassword(arr, output,c, 0, 0);
 	}
 
 }
