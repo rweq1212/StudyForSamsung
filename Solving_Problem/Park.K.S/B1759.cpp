@@ -1,3 +1,5 @@
+/* 1759ë²ˆ: ì•”í˜¸ ë§Œë“¤ê¸° (https://www.acmicpc.net/problem/1759) */
+
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -11,31 +13,30 @@ bool isvalid(string s) {
 	int j = 0, m = 0;
 	for (char c : s) {
 		if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
-			m++;	// ¸ğÀ½ °³¼ö Áõ°¡
+			m++;	// ëª¨ìŒ ê°œìˆ˜ ì¦ê°€
 		else
-			j++;	// ÀÚÀ½ °³¼ö Áõ°¡
+			j++;	// ììŒ ê°œìˆ˜ ì¦ê°€
 	}
-	return j >= 2 && m >= 1;	// ÀÚÀ½ 2°³ ÀÌ»ó, ¸ğÀ½ 1°³ ÀÌ»ó Á¶°Ç ¸¸Á· ¿©ºÎ ¹İÈ¯
+	return j >= 2 && m >= 1;	// ììŒ 2ê°œ ì´ìƒ, ëª¨ìŒ 1ê°œ ì´ìƒ ì¡°ê±´ ë§Œì¡± ì—¬ë¶€ ë°˜í™˜
 }
 
 void go(int i, string s) {
 	if (i == C) {
 		if (s.length() == L && isvalid(s))
-			cout << s << endl;	// °¡´É¼º ÀÖ´Â ¾ÏÈ£ Ãâ·Â
+			cout << s << endl;	// ê°€ëŠ¥ì„± ìˆëŠ” ì•”í˜¸ ì¶œë ¥
 		return;
 	}
-
 	go(i + 1, s + v[i]);
 	go(i + 1, s);
 }
 
 int main(void) {
-	// ÀÔ·ÂºÎ
+	// ì…ë ¥ë¶€
 	cin >> L >> C;
 	for (int i = 0; i < C; i++)
 		cin >> v[i];
 
-	// Ã³¸®ºÎ
+	// ì²˜ë¦¬ë¶€
 	sort(v.begin(), v.begin() + C);
 	go(0, "");
 
