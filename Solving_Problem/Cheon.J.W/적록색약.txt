@@ -1,0 +1,73 @@
+#include<iostream>
+
+using namespace std;
+
+int n,cnt,cnt2;
+
+char inputColor[110][110];
+int isVisited[110][110] = {0,};
+int dx[] = {1,-1,0,0};
+int dy[] = {0,0,-1,1};
+
+void dfs(int x, int y, char a){
+	// 0, 0, tmp 
+	isVisited[x][y] = 1;	
+	for(int i=0; i<4; i++){
+		int nx = x + dx[i];
+		int ny = y + dy[i];
+		if(nx<0 || ny<0 || nx>=n || ny>=n || isVisited[nx][ny]==1 || inputColor[nx][ny]!=a) continue;
+		dfs(nx,ny,a);
+	}
+}
+
+void changeColor(){
+	for(int i=0; i<n; i++){
+		for(int j=0; j<n; j++){
+			if(inputColor[i][j] == 'R') inputColor[i][j] = 'G';
+			
+		}
+	}
+}
+
+int main(){
+	
+	scanf("%d",&n);
+		
+	for(int i=0; i<n; i++){
+		for(int j=0; j<n; j++)
+		{
+			cin>>inputColor[i][j];			
+		}
+	}
+	
+	cnt = 0;
+	char tmp;
+	for(int i=0; i<n; i++){
+		for(int j=0; j<n; j++){
+			if(isVisited[i][j] == 0){	
+				dfs(i,j,inputColor[i][j]);
+				cnt++;
+			} 
+		}
+	}	
+	
+	for(int i=0; i<n; i++){
+		for(int j=0; j<n; j++){
+			isVisited[i][j] = false;
+		}
+	}
+	changeColor();
+	
+	for(int i=0; i<n; i++){
+		for(int j=0; j<n; j++){
+			if(isVisited[i][j] == 0){
+				dfs(i,j,inputColor[i][j]);
+				cnt2++;
+			}
+		}
+	}
+	
+	printf("%d %d",cnt,cnt2);	
+
+	return 0;
+}
