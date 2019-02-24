@@ -1,0 +1,54 @@
+<코드>
+
+ /*
+스터디에서 배운 새로운 방법으로 접근해보았다.
+*/
+#include<iostream>
+#include<string> // 헤더를 추가하면 string 을 쓸 수 있다. 
+#include<algorithm>
+
+using namespace std;
+
+int L,C;
+int jCnt, mCnt, totalCnt;
+char alpha[20];
+int isVisited[20] = {0,};
+
+bool jm(char a){
+  if(a == 'a' || a == 'e' || a == 'o' || a == 'i' || a == 'u'){
+    return true;
+  }else{
+    return false;
+  }
+}
+
+void getEncrypt(int idx, string str, int m, int j){
+  if(str.size() == L){
+    if(m>=1 && j>=2){
+      cout<<str<<endl;
+      return;
+    }
+  }
+  
+  for(int i=idx; i<C; i++){
+    if(jm(alpha[i])){
+      getEncrypt(i+1,str+alpha[i],m+1,j);
+    }else{
+      getEncrypt(i+1,str+alpha[i],m,j+1);
+    }
+  }
+}
+
+int main()
+{
+  cin>>L>>C;
+  for(int i=0; i<C; i++){
+    cin>>alpha[i];
+  }
+  
+  sort(alpha,alpha+C);
+  
+  getEncrypt(0,"",0,0);
+  
+  return 0;
+}
